@@ -97,6 +97,7 @@ public class CaiMoGuHelp {
                 .url(String.format(urlFormat, dateStr, page))
                 .addHeader("Host","www.caimogu.cc")
                 .addHeader("X-Requested-With","XMLHttpRequest")
+                .addHeader("referer","https://www.caimogu.cc/game/find.html")
                 .build();
     }
 
@@ -305,6 +306,7 @@ public class CaiMoGuHelp {
 
     private static boolean acPostComments(String postId,String uId,String msg,String caiMoGuToken){
         OkHttpClient client = OkHttpClientFactory.getInstance().getClient();
+        String referer="https://www.caimogu.cc/post/%s.html";
         FormBody formBody = new FormBody.Builder()
                 .add("pid", postId)
                 .add("ppid", "0")
@@ -317,6 +319,7 @@ public class CaiMoGuHelp {
                 .url("https://www.caimogu.cc/post/act/comment") // 测试API，可替换为实际接口
                 .post(formBody)
                 .addHeader("Host","www.caimogu.cc")
+                .addHeader("referer",String.format(referer,postId))
                 .addHeader("Cookie",caiMoGuToken)
                 .addHeader("X-Requested-With","XMLHttpRequest")
                 .build();
