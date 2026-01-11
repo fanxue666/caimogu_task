@@ -128,10 +128,12 @@ public class App {
         String acGameIdsStr = String.join("\n", acGameIds);
         GithubHelp.createOrUpdateFile(acGameIdsStr, acIdsFileName, ownerRepo, githubApiToken);
 
+
         Set<String> postIds = checkAcFileName(postIdsFileName, replyGroup, "1");
         int acPostNum = CaiMoGuH5Help.getRuleDetail(postIds);
         GithubHelp.createOrUpdateFile(String.join("\n", postIds), postIdsFileName, ownerRepo, githubApiToken);
         log.error("成功评论帖子数量:{}", acPostNum);
+
 
         Set<String> gameCommentIds = checkAcFileName(gameCommentFileName, replyGroup, "3");
         for (String gameId : gameIds) {
@@ -163,8 +165,9 @@ public class App {
             }
             checkIds = replyGroup.get(type);
             if (checkIds.isEmpty()) {
-                return checkIds;
+                return new HashSet<>();
             }
+            log.error("{}数据同步",fileName);
             GithubHelp.createOrUpdateFile(String.join("\n", checkIds), fileName, githubInfo.getOwnerRepo(), githubInfo.getGithubApiToken());
         }
         return checkIds;

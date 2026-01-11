@@ -133,7 +133,7 @@ public class CaiMoGuH5Help {
         url = buildBaseParams(url, params, "msgId", "content");
         JSONObject json = new JSONObject();
         String timeStr = params.get("time");
-        json.put("msgId", vrEncrypt(params.get("id"), timeStr));
+        json.put("msgId", vrEncrypt(params.get("msgId"), timeStr));
         json.put("content", vrEncrypt(params.get("content"), timeStr));
         String jsonStr = json.toJSONString();
         RequestBody requestBody = RequestBody.create(jsonStr, MediaType.parse("application/json"));
@@ -236,8 +236,11 @@ public class CaiMoGuH5Help {
                     } else {
                         log.error("评论失败:{}-{}", circleId, detaildId);
                     }
+                    if (acCommentNum>=acCommentMax) {
+                        return acCommentNum;
+                    }
                 }
-            } while (pageSize > 0 && page < pageMax && acCommentNum < acCommentMax);
+            } while (pageSize > 0 && page < pageMax);
         }
         return acCommentNum;
     }
