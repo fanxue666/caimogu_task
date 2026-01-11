@@ -28,18 +28,19 @@ public class App {
         githubInfo.setGithubApiToken(githubApiToken);
         githubInfo.setOwnerRepo(ownerRepo);
         Config.INSTANCE.GithubInfo = githubInfo;
-        if (userName == null || userName.trim().isEmpty()) {
-            log.error("CMG_NAME 未设置");
+        if (ownerRepo == null || ownerRepo.trim().isEmpty()) {
+            log.error("OWNER_REPO 未设置");
             return;
         }
         if (password == null || password.trim().isEmpty()) {
             log.error("CMG_PASSWORD 未设置");
             return;
         }
-        if (ownerRepo == null || ownerRepo.trim().isEmpty()) {
-            log.error("OWNER_REPO 未设置");
+        if (userName == null || userName.trim().isEmpty()) {
+            log.error("CMG_NAME 未设置");
             return;
         }
+
         if (githubApiToken == null || githubApiToken.trim().isEmpty()) {
             log.error("MY_GITHUB_API_TOKEN 未设置");
             return;
